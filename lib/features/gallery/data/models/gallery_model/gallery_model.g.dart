@@ -8,12 +8,12 @@ part of 'gallery_model.dart';
 
 _$_GalleryModel _$$_GalleryModelFromJson(Map<String, dynamic> json) =>
     _$_GalleryModel(
-      imageModels: (json['imageModels'] as List<dynamic>)
+      imageModels: (json['image_models'] as List<dynamic>)
           .map((e) => ImageModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$$_GalleryModelToJson(_$_GalleryModel instance) =>
     <String, dynamic>{
-      'imageModels': instance.imageModels,
+      'image_models': instance.imageModels,
     };

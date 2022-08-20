@@ -7,6 +7,7 @@ part 'image_model.g.dart';
 class ImageModel with _$ImageModel {
   factory ImageModel({
     required final String author,
+    required final String downloadUrl,
   }) = _ImageModel;
 
   factory ImageModel.fromJson(Map<String, dynamic> json) =>

@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          # When deserializing all fields are converted to snakeCase (`download_url` -> `downloadUrl`)
+          field_rename: snake

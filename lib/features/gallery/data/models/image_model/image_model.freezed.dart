@@ -21,6 +21,7 @@ ImageModel _$ImageModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ImageModel {
   String get author => throw _privateConstructorUsedError;
+  String get downloadUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $ImageModelCopyWith<$Res> {
   factory $ImageModelCopyWith(
           ImageModel value, $Res Function(ImageModel) then) =
       _$ImageModelCopyWithImpl<$Res>;
-  $Res call({String author});
+  $Res call({String author, String downloadUrl});
 }
 
 /// @nodoc
@@ -47,11 +48,16 @@ class _$ImageModelCopyWithImpl<$Res> implements $ImageModelCopyWith<$Res> {
   @override
   $Res call({
     Object? author = freezed,
+    Object? downloadUrl = freezed,
   }) {
     return _then(_value.copyWith(
       author: author == freezed
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
+              as String,
+      downloadUrl: downloadUrl == freezed
+          ? _value.downloadUrl
+          : downloadUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -64,7 +70,7 @@ abstract class _$$_ImageModelCopyWith<$Res>
           _$_ImageModel value, $Res Function(_$_ImageModel) then) =
       __$$_ImageModelCopyWithImpl<$Res>;
   @override
-  $Res call({String author});
+  $Res call({String author, String downloadUrl});
 }
 
 /// @nodoc
@@ -80,11 +86,16 @@ class __$$_ImageModelCopyWithImpl<$Res> extends _$ImageModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? author = freezed,
+    Object? downloadUrl = freezed,
   }) {
     return _then(_$_ImageModel(
       author: author == freezed
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
+              as String,
+      downloadUrl: downloadUrl == freezed
+          ? _value.downloadUrl
+          : downloadUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -93,17 +104,19 @@ class __$$_ImageModelCopyWithImpl<$Res> extends _$ImageModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ImageModel implements _ImageModel {
-  _$_ImageModel({required this.author});
+  _$_ImageModel({required this.author, required this.downloadUrl});
 
   factory _$_ImageModel.fromJson(Map<String, dynamic> json) =>
       _$$_ImageModelFromJson(json);
 
   @override
   final String author;
+  @override
+  final String downloadUrl;
 
   @override
   String toString() {
-    return 'ImageModel(author: $author)';
+    return 'ImageModel(author: $author, downloadUrl: $downloadUrl)';
   }
 
   @override
@@ -111,13 +124,17 @@ class _$_ImageModel implements _ImageModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ImageModel &&
-            const DeepCollectionEquality().equals(other.author, author));
+            const DeepCollectionEquality().equals(other.author, author) &&
+            const DeepCollectionEquality()
+                .equals(other.downloadUrl, downloadUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(author));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(author),
+      const DeepCollectionEquality().hash(downloadUrl));
 
   @JsonKey(ignore: true)
   @override
@@ -133,13 +150,17 @@ class _$_ImageModel implements _ImageModel {
 }
 
 abstract class _ImageModel implements ImageModel {
-  factory _ImageModel({required final String author}) = _$_ImageModel;
+  factory _ImageModel(
+      {required final String author,
+      required final String downloadUrl}) = _$_ImageModel;
 
   factory _ImageModel.fromJson(Map<String, dynamic> json) =
       _$_ImageModel.fromJson;
 
   @override
   String get author;
+  @override
+  String get downloadUrl;
   @override
   @JsonKey(ignore: true)
   _$$_ImageModelCopyWith<_$_ImageModel> get copyWith =>
