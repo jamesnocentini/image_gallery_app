@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:image_gallery_app/injection_container.dart' as di;
 
 void main() {
+  // Initialize dependency injection
+  di.init();
+
   runApp(const MyApp());
 }
 
