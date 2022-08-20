@@ -1,10 +1,8 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
-part 'failures.freezed.dart';
-
-@freezed
-class Failure with _$Failure {
-  factory Failure() = _Failure;
+class Failure extends Equatable {
+  @override
+  List<Object?> get props => [];
 }
 
-class ServerFailure implements Failure {}
+class ServerFailure extends Failure {}
