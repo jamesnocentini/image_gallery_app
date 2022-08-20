@@ -18,7 +18,7 @@ class GalleryRemoteDataSource {
     final uri = Uri.parse('$_baseUrl/list');
     final response = await httpClient.get(uri);
     if (response.statusCode == 200) {
-      return GalleryModel.fromJson({'imageModels': jsonDecode(response.body)});
+      return GalleryModel.fromJson({'image_models': jsonDecode(response.body)});
     }
     throw ServerException();
   }

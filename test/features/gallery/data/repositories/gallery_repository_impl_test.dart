@@ -22,7 +22,7 @@ void main() {
   });
   group('getGalleryImages', () {
     final tGalleryModel =
-        GalleryModel(imageModels: [ImageModel(author: 'Joe')]);
+        GalleryModel(imageModels: [ImageModel(author: 'Joe', downloadUrl: '')]);
     test(
       'should return Right(tGalleryModel) when the call is successful',
       () async {

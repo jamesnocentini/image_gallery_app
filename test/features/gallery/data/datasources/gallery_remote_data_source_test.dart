@@ -39,7 +39,7 @@ main() {
         expect(
           result,
           GalleryModel.fromJson(
-            {'imageModels': jsonDecode(fixture('gallery.json'))},
+            {'image_models': jsonDecode(fixture('gallery.json'))},
           ),
         );
       },

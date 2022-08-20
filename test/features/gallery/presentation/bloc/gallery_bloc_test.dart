@@ -31,7 +31,7 @@ void main() {
 
   group('GalleryBloc', () {
     final tGallery = GalleryModel.fromJson(
-        {'imageModels': jsonDecode(fixture('gallery.json'))});
+        {'image_models': jsonDecode(fixture('gallery.json'))});
 
     test(
       'should emit [GalleryState.loading(), GalleryState.loaded(tGallery)] when the repository call is successful',
