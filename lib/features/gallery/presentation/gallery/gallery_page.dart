@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_gallery_app/features/gallery/presentation/bloc/gallery_bloc.dart';
+import 'package:image_gallery_app/features/image/presentation/image/image_page.dart';
 import 'package:image_gallery_app/injection_container.dart';
 
 class GalleryPage extends StatelessWidget {
@@ -28,7 +29,20 @@ class GalleryPage extends StatelessWidget {
                   itemCount: galleryModel.imageModels.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            // For the page transition to be like a modal
+                            fullscreenDialog: true,
+                            builder: (context) => ImagePage(
+                              image:
+                                  galleryModel.imageModels[index].downloadUrl,
+                              name: galleryModel.imageModels[index].author,
+                            ),
+                          ),
+                        );
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
