@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImagePage extends StatelessWidget {
@@ -21,7 +22,7 @@ class ImagePage extends StatelessWidget {
             aspectRatio: 1,
             child: SizedBox(
               child: Image(
-                image: NetworkImage(image),
+                image: CachedNetworkImageProvider(image),
               ),
             ),
           ),
