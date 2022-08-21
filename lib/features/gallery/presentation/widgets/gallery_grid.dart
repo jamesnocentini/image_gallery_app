@@ -44,7 +44,7 @@ class _GalleryGridState extends State<GalleryGrid> {
       builder: (context, state) {
         return state.when(
           initial: () => Container(),
-          loading: () => const CircularProgressIndicator(),
+          loading: () => const CircularProgressIndicator(color: Colors.black),
           loaded: (galleryModel) => GridView.builder(
             controller: _scrollController,
             // Defines the area to render before and after the viewport.
