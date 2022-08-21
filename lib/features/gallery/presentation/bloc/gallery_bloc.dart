@@ -17,18 +17,16 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
       // Only show a circular indicator the first time the page is shown.
       // During pagination, the grid isn't rebuilt until data or an error
       // is received.
-      if (state is! _Loaded) {
-        emit(const _Loading());
-      }
+      state.mapOrNull(
+        initial: (value) => emit(const _Loading()),
+      );
 
       final result = await galleryRepository.getGalleryImages(event.pageNumber);
       result.fold(
         (l) => emit(const _Error()),
         (r) {
           state.whenOrNull(
-            loading: () => emit(
-              _Loaded(r),
-            ),
+            loading: () => emit(_Loaded(r)),
             // If the current state is _Loaded then it means the user is
             // requesting more images from the back end so we append them to
             // the existing state.galleryModel.imageModels
