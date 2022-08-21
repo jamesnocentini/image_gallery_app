@@ -14,9 +14,10 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
     required this.galleryRepository,
   }) : super(const _Initial()) {
     on<_GetGalleryImages>((event, emit) async {
-      // We only show a circular indicator the first time the page is shown
-      // (not when paginating)
-      if (state is _Initial) {
+      // Only show a circular indicator the first time the page is shown.
+      // During pagination, the grid isn't rebuilt until data or an error
+      // is received.
+      if (state is! _Loaded) {
         emit(const _Loading());
       }
 
