@@ -40,9 +40,35 @@ class _GalleryGridState extends State<GalleryGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GalleryBloc, GalleryState>(
+    return BlocConsumer<GalleryBloc, GalleryState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          error: () {
+            const snackBar = SnackBar(
+              content: Text('There was an error'),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        );
+      },
+      buildWhen: (previous, current) {
+        // Don't build when the new state is an error and the previous one is a
+        // loaded state. This means some images were loaded but the next page
+        // in the pagination process failed to load images. By doing so, images
+        // that are already displayed remain visible.
+        return previous.maybeMap(
+              loaded: (value) {
+                return current.maybeMap(
+                  error: (value) => false,
+                  orElse: () => true,
+                );
+              },
+              orElse: () => true,
+            ) ??
+            true;
+      },
       builder: (context, state) {
-        return state.when(
+        return state.maybeWhen(
           initial: () => Container(),
           loading: () => const CircularProgressIndicator(color: Colors.black),
           loaded: (galleryModel) => GridView.builder(
@@ -87,7 +113,11 @@ class _GalleryGridState extends State<GalleryGrid> {
               );
             },
           ),
-          error: () => const Text('There was an error'),
+          orElse: () => ElevatedButton(
+            onPressed: () => BlocProvider.of<GalleryBloc>(context)
+                .add(const GalleryEvent.getGalleryImages(1)),
+            child: const Text('Try again'),
+          ),
         );
       },
     );
