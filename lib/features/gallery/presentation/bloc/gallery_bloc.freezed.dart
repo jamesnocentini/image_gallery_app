@@ -16,19 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GalleryEvent {
+  int get pageNumber => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getGalleryImages,
+    required TResult Function(int pageNumber) getGalleryImages,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getGalleryImages,
+    TResult Function(int pageNumber)? getGalleryImages,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getGalleryImages,
+    TResult Function(int pageNumber)? getGalleryImages,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +49,10 @@ mixin _$GalleryEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $GalleryEventCopyWith<GalleryEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +60,7 @@ abstract class $GalleryEventCopyWith<$Res> {
   factory $GalleryEventCopyWith(
           GalleryEvent value, $Res Function(GalleryEvent) then) =
       _$GalleryEventCopyWithImpl<$Res>;
+  $Res call({int pageNumber});
 }
 
 /// @nodoc
@@ -64,13 +70,28 @@ class _$GalleryEventCopyWithImpl<$Res> implements $GalleryEventCopyWith<$Res> {
   final GalleryEvent _value;
   // ignore: unused_field
   final $Res Function(GalleryEvent) _then;
+
+  @override
+  $Res call({
+    Object? pageNumber = freezed,
+  }) {
+    return _then(_value.copyWith(
+      pageNumber: pageNumber == freezed
+          ? _value.pageNumber
+          : pageNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$$_GetGalleryImagesCopyWith<$Res> {
+abstract class _$$_GetGalleryImagesCopyWith<$Res>
+    implements $GalleryEventCopyWith<$Res> {
   factory _$$_GetGalleryImagesCopyWith(
           _$_GetGalleryImages value, $Res Function(_$_GetGalleryImages) then) =
       __$$_GetGalleryImagesCopyWithImpl<$Res>;
+  @override
+  $Res call({int pageNumber});
 }
 
 /// @nodoc
@@ -83,51 +104,75 @@ class __$$_GetGalleryImagesCopyWithImpl<$Res>
 
   @override
   _$_GetGalleryImages get _value => super._value as _$_GetGalleryImages;
+
+  @override
+  $Res call({
+    Object? pageNumber = freezed,
+  }) {
+    return _then(_$_GetGalleryImages(
+      pageNumber == freezed
+          ? _value.pageNumber
+          : pageNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GetGalleryImages implements _GetGalleryImages {
-  const _$_GetGalleryImages();
+  const _$_GetGalleryImages(this.pageNumber);
+
+  @override
+  final int pageNumber;
 
   @override
   String toString() {
-    return 'GalleryEvent.getGalleryImages()';
+    return 'GalleryEvent.getGalleryImages(pageNumber: $pageNumber)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetGalleryImages);
+        (other.runtimeType == runtimeType &&
+            other is _$_GetGalleryImages &&
+            const DeepCollectionEquality()
+                .equals(other.pageNumber, pageNumber));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(pageNumber));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_GetGalleryImagesCopyWith<_$_GetGalleryImages> get copyWith =>
+      __$$_GetGalleryImagesCopyWithImpl<_$_GetGalleryImages>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getGalleryImages,
+    required TResult Function(int pageNumber) getGalleryImages,
   }) {
-    return getGalleryImages();
+    return getGalleryImages(pageNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getGalleryImages,
+    TResult Function(int pageNumber)? getGalleryImages,
   }) {
-    return getGalleryImages?.call();
+    return getGalleryImages?.call(pageNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getGalleryImages,
+    TResult Function(int pageNumber)? getGalleryImages,
     required TResult orElse(),
   }) {
     if (getGalleryImages != null) {
-      return getGalleryImages();
+      return getGalleryImages(pageNumber);
     }
     return orElse();
   }
@@ -162,7 +207,14 @@ class _$_GetGalleryImages implements _GetGalleryImages {
 }
 
 abstract class _GetGalleryImages implements GalleryEvent {
-  const factory _GetGalleryImages() = _$_GetGalleryImages;
+  const factory _GetGalleryImages(final int pageNumber) = _$_GetGalleryImages;
+
+  @override
+  int get pageNumber;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GetGalleryImagesCopyWith<_$_GetGalleryImages> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

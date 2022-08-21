@@ -14,11 +14,32 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
     required this.galleryRepository,
   }) : super(const _Initial()) {
     on<_GetGalleryImages>((event, emit) async {
-      emit(const _Loading());
-      final result = await galleryRepository.getGalleryImages();
+      // We only show a circular indicator the first time the page is shown
+      // (not when paginating)
+      if (state is _Initial) {
+        emit(const _Loading());
+      }
+
+      final result = await galleryRepository.getGalleryImages(event.pageNumber);
       result.fold(
         (l) => emit(const _Error()),
-        (r) => emit(_Loaded(r)),
+        (r) {
+          state.whenOrNull(
+            loading: () => emit(
+              _Loaded(r),
+            ),
+            // If the current state is _Loaded then it means the user is
+            // requesting more images from the back end so we append them to
+            // the existing state.galleryModel.imageModels
+            loaded: (galleryModel) {
+              final imageModels = [
+                ...galleryModel.imageModels,
+                ...r.imageModels
+              ];
+              emit(_Loaded(galleryModel.copyWith(imageModels: imageModels)));
+            },
+          );
+        },
       );
     });
   }
