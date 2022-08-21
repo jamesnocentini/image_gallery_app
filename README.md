@@ -2,8 +2,7 @@
 
 A grid view app that shows images from https://picsum.photos/
 
-<img src="screenshots/app.png" width=200 />
-<img src="screenshots/app2.png" width=200 />
+<img src="screenshots/app.png" width=200 /><img src="screenshots/app2.png" width=200 />
 
 <br/>
 
