@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,30 +54,30 @@ class _GalleryGridState extends State<GalleryGrid> {
             ),
             itemCount: galleryModel.imageModels.length,
             itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      // For the page transition to be like a modal
-                      fullscreenDialog: true,
-                      builder: (context) => ImagePage(
-                        image: galleryModel.imageModels[index].downloadUrl,
-                        name: galleryModel.imageModels[index].author,
+              return OpenContainer(
+                // OpenContainer's default closeShape value is a RoundedRectangle
+                // with a radius of 4.0. So we override it here with a border of
+                // 0.0 (default) otherwise it results in the image being clipped
+                // with rounded corners.
+                closedShape: const RoundedRectangleBorder(),
+                closedBuilder: (_, __) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: CachedNetworkImageProvider(
+                          galleryModel.imageModels[index].downloadUrl,
+                        ),
                       ),
                     ),
                   );
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
-                        galleryModel.imageModels[index].downloadUrl,
-                      ),
-                    ),
-                  ),
-                ),
+                openBuilder: (_, __) {
+                  return ImagePage(
+                    image: galleryModel.imageModels[index].downloadUrl,
+                    name: galleryModel.imageModels[index].author,
+                  );
+                },
               );
             },
           ),
