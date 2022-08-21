@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_gallery_app/features/gallery/domain/repositories/gallery_repository.dart';
 import 'package:image_gallery_app/features/gallery/presentation/bloc/gallery_bloc.dart';
-import 'package:image_gallery_app/features/image/presentation/image/image_page.dart';
+import 'package:image_gallery_app/features/gallery/presentation/widgets/gallery_grid.dart';
 import 'package:image_gallery_app/injection_container.dart';
 
 class GalleryPage extends StatelessWidget {
@@ -14,53 +14,13 @@ class GalleryPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Image Gallery')),
       body: Center(
         child: BlocProvider(
+          // Blocs are not dependency injected with GetIt because BlocProvider
+          // automatically manages the lifecycle of bloc instances (when to
+          // return the same instance and when to dispose of it)
           create: (context) =>
               GalleryBloc(galleryRepository: sl<GalleryRepository>())
                 ..add(const GalleryEvent.getGalleryImages(1)),
-          child: BlocBuilder<GalleryBloc, GalleryState>(
-            builder: (context, state) {
-              return state.when(
-                initial: () => const CircularProgressIndicator(),
-                loading: () => const CircularProgressIndicator(),
-                loaded: (galleryModel) => GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 0,
-                    mainAxisSpacing: 0,
-                    crossAxisCount: 3,
-                  ),
-                  itemCount: galleryModel.imageModels.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            // For the page transition to be like a modal
-                            fullscreenDialog: true,
-                            builder: (context) => ImagePage(
-                              image:
-                                  galleryModel.imageModels[index].downloadUrl,
-                              name: galleryModel.imageModels[index].author,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                galleryModel.imageModels[index].downloadUrl),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                error: () => const Text('There was an error'),
-              );
-            },
-          ),
+          child: const GalleryGrid(),
         ),
       ),
     );
