@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_gallery_app/features/gallery/presentation/bloc/gallery_bloc.dart';
@@ -70,8 +71,9 @@ class _GalleryGridState extends State<GalleryGrid> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(
-                          galleryModel.imageModels[index].downloadUrl),
+                      image: CachedNetworkImageProvider(
+                        galleryModel.imageModels[index].downloadUrl,
+                      ),
                     ),
                   ),
                 ),
