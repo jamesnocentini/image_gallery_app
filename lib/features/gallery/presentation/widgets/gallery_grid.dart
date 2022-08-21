@@ -1,8 +1,8 @@
-import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_gallery_app/features/gallery/presentation/bloc/gallery_bloc.dart';
+import 'package:image_gallery_app/core/animations/page_route_transitions.dart';
 import 'package:image_gallery_app/features/image/presentation/image/image_page.dart';
 
 class GalleryGrid extends StatefulWidget {
@@ -60,29 +60,27 @@ class _GalleryGridState extends State<GalleryGrid> {
             itemCount: galleryModel.imageModels.length,
             itemBuilder: (context, index) {
               final imageModel = galleryModel.imageModels[index];
-              return OpenContainer(
-                // OpenContainer's default closeShape value is a RoundedRectangle
-                // with a radius of 4.0. So we override it here with a border of
-                // 0.0 (default) otherwise it results in the image being clipped
-                // with rounded corners.
-                closedShape: const RoundedRectangleBorder(),
-                closedBuilder: (_, __) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider(
-                          imageModel.downloadUrl,
-                        ),
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push<void>(
+                    context,
+                    PageRouteTransitions.fadeThrough(
+                      ImagePage(
+                        imageModel: imageModel,
                       ),
                     ),
                   );
                 },
-                openBuilder: (_, __) {
-                  return ImagePage(
-                    imageModel: imageModel,
-                  );
-                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(
+                        imageModel.downloadUrl,
+                      ),
+                    ),
+                  ),
+                ),
               );
             },
           ),
