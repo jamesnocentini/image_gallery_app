@@ -14,7 +14,13 @@ class ImagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Image')),
+      appBar: AppBar(
+        title: const Text('Image'),
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: Hero(
         tag: imageModel.id,
         child: Container(
