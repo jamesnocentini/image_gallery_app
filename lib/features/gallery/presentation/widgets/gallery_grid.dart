@@ -54,6 +54,7 @@ class _GalleryGridState extends State<GalleryGrid> {
             ),
             itemCount: galleryModel.imageModels.length,
             itemBuilder: (context, index) {
+              final imageModel = galleryModel.imageModels[index];
               return OpenContainer(
                 // OpenContainer's default closeShape value is a RoundedRectangle
                 // with a radius of 4.0. So we override it here with a border of
@@ -66,7 +67,7 @@ class _GalleryGridState extends State<GalleryGrid> {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(
-                          galleryModel.imageModels[index].downloadUrl,
+                          imageModel.downloadUrl,
                         ),
                       ),
                     ),
@@ -74,8 +75,7 @@ class _GalleryGridState extends State<GalleryGrid> {
                 },
                 openBuilder: (_, __) {
                   return ImagePage(
-                    image: galleryModel.imageModels[index].downloadUrl,
-                    name: galleryModel.imageModels[index].author,
+                    imageModel: imageModel,
                   );
                 },
               );

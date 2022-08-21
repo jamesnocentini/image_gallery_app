@@ -1,16 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:image_gallery_app/features/gallery/data/models/image_model/image_model.dart';
 
 class ImagePage extends StatelessWidget {
   const ImagePage({
     Key? key,
-    required this.image,
-    required this.name,
+    required this.imageModel,
   }) : super(key: key);
 
-  final String image;
-  final String name;
+  final ImageModel imageModel;
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +21,7 @@ class ImagePage extends StatelessWidget {
             aspectRatio: 1,
             child: SizedBox(
               child: Image(
-                image: CachedNetworkImageProvider(image),
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(20.0),
-            child: Center(
-              child: Text(
-                name,
-                style: const TextStyle(fontSize: 40),
+                image: CachedNetworkImageProvider(imageModel.downloadUrl),
               ),
             ),
           ),
