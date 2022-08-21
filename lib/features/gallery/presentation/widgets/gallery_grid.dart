@@ -47,6 +47,11 @@ class _GalleryGridState extends State<GalleryGrid> {
           loading: () => const CircularProgressIndicator(),
           loaded: (galleryModel) => GridView.builder(
             controller: _scrollController,
+            // Defines the area to render before and after the viewport.
+            // A higher value results in a smoother scrolling experience
+            // but can hinder the initial loading experience as many images are
+            // rendered concurrently.
+            cacheExtent: 9999,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisSpacing: 0,
               mainAxisSpacing: 0,
