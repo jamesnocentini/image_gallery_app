@@ -12,13 +12,13 @@ A loading indicator is shown when scrolling to the bottom of the page and a new 
 
 ### Animations
 
-Page route and hero transitions are used between the GridView and full screen image page.
+Page route and hero transitions are used between the GridView and the full screen image page.
 
 ### Infinite scrolling
 
 To implement infinite scrolling, the `GalleryGrid` is a stateful widget that tracks the scrolling position and when it reaches the end adds an event to the `GalleryBloc` to fetch more images.
 
-The `GalleryGrid` is implemented using a `SliverGrid` inside of a `CustomScrollView` and a circular progress indicator is position below the `SliverGrid`.
+The `GalleryGrid` uses a `SliverGrid` inside of a `CustomScrollView` and a circular progress indicator is positioned below the `SliverGrid`.
 
 Currently the circular progress indicator is always rendered but only visible when scrolling to the end of the list.
 
@@ -34,7 +34,7 @@ The `cached_network_image` package is used to cache images.
 
 The `main` branch doesn't contain any request caching.
 
-But I got started with adding request caching on another branch and the diff can be seen on:
+But I started adding request caching on another branch and the diff can be seen on:
 
 [https://github.com/jamesnocentini/image_gallery_app/compare/main...request-caching](https://github.com/jamesnocentini/image_gallery_app/compare/main...request-caching)
 
