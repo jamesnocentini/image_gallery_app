@@ -71,12 +71,15 @@ class _GalleryGridState extends State<GalleryGrid> {
                     ),
                   );
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
-                        imageModel.downloadUrl,
+                child: Hero(
+                  tag: imageModel.id,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: CachedNetworkImageProvider(
+                          imageModel.downloadUrl,
+                        ),
                       ),
                     ),
                   ),

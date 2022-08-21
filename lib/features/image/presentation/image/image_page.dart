@@ -15,17 +15,18 @@ class ImagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Image')),
-      body: Column(
-        children: [
-          AspectRatio(
-            aspectRatio: 1,
-            child: SizedBox(
-              child: Image(
-                image: CachedNetworkImageProvider(imageModel.downloadUrl),
+      body: Hero(
+        tag: imageModel.id,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.contain,
+              image: CachedNetworkImageProvider(
+                imageModel.downloadUrl,
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
