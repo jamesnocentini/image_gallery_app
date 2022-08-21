@@ -27,12 +27,12 @@ void main() {
       'should return Right(tGalleryModel) when the call is successful',
       () async {
         // arrange
-        when(() => mockGalleryRemoteDataSource.getGalleryImages())
+        when(() => mockGalleryRemoteDataSource.getGalleryImages(1))
             .thenAnswer((_) async => tGalleryModel);
         // act
-        final result = await sut.getGalleryImages();
+        final result = await sut.getGalleryImages(1);
         // assert
-        verify(() => mockGalleryRemoteDataSource.getGalleryImages());
+        verify(() => mockGalleryRemoteDataSource.getGalleryImages(1));
         expect(result, Right(tGalleryModel));
       },
     );
@@ -41,12 +41,12 @@ void main() {
       'should return Left(ServerFailure) when the call is unsuccesful',
       () async {
         // arrange
-        when(() => mockGalleryRemoteDataSource.getGalleryImages())
+        when(() => mockGalleryRemoteDataSource.getGalleryImages(1))
             .thenThrow(ServerException());
         // act
-        final response = await sut.getGalleryImages();
+        final response = await sut.getGalleryImages(1);
         // assert
-        verify(() => mockGalleryRemoteDataSource.getGalleryImages());
+        verify(() => mockGalleryRemoteDataSource.getGalleryImages(1));
         expect(response, Left(ServerFailure()));
       },
     );

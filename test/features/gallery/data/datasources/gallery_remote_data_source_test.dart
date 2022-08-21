@@ -32,10 +32,10 @@ main() {
         when(() => mockClient.get(any()))
             .thenAnswer((_) async => tSuccessfulResponse);
         // act
-        final result = await sut.getGalleryImages();
+        final result = await sut.getGalleryImages(1);
         // assert
-        verify(
-            () => mockClient.get(Uri.parse('https://picsum.photos/v2/list')));
+        verify(() =>
+            mockClient.get(Uri.parse('https://picsum.photos/v2/list?page=1')));
         expect(
           result,
           GalleryModel.fromJson(
@@ -54,9 +54,9 @@ main() {
         // act
         final call = sut.getGalleryImages;
         // assert
-        expect(() => call(), throwsA(isA<ServerException>()));
-        verify(
-            () => mockClient.get(Uri.parse('https://picsum.photos/v2/list')));
+        expect(() => call(1), throwsA(isA<ServerException>()));
+        verify(() =>
+            mockClient.get(Uri.parse('https://picsum.photos/v2/list?page=1')));
       },
     );
   });

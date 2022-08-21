@@ -14,8 +14,8 @@ class GalleryRemoteDataSource {
 
   GalleryRemoteDataSource(this.httpClient);
 
-  Future<GalleryModel> getGalleryImages() async {
-    final uri = Uri.parse('$_baseUrl/list');
+  Future<GalleryModel> getGalleryImages(int pageNumber) async {
+    final uri = Uri.parse('$_baseUrl/list?page=$pageNumber');
     final response = await httpClient.get(uri);
     if (response.statusCode == 200) {
       return GalleryModel.fromJson({'image_models': jsonDecode(response.body)});

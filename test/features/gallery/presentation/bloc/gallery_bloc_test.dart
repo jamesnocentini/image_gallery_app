@@ -37,7 +37,7 @@ void main() {
       'should emit [GalleryState.loading(), GalleryState.loaded(tGallery)] when the repository call is successful',
       () async {
         // arrange
-        when(() => mockGalleryRepository.getGalleryImages())
+        when(() => mockGalleryRepository.getGalleryImages(1))
             .thenAnswer((_) async => Right(tGallery));
         // assert
         expectLater(
@@ -48,7 +48,7 @@ void main() {
           ]),
         );
         // act
-        sut.add(const GalleryEvent.getGalleryImages());
+        sut.add(const GalleryEvent.getGalleryImages(1));
       },
     );
   });
@@ -57,7 +57,7 @@ void main() {
     'should emit [GalleryState.loading(), GalleryState.loaded(tGallery)] when the repository call is successful',
     () async {
       // arrange
-      when(() => mockGalleryRepository.getGalleryImages())
+      when(() => mockGalleryRepository.getGalleryImages(1))
           .thenAnswer((_) async => Left(ServerFailure()));
       // assert
       expectLater(
@@ -68,7 +68,7 @@ void main() {
         ]),
       );
       // act
-      sut.add(const GalleryEvent.getGalleryImages());
+      sut.add(const GalleryEvent.getGalleryImages(1));
     },
   );
 }

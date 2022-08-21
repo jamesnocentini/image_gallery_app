@@ -13,9 +13,11 @@ class GalleryRepositoryImpl implements GalleryRepository {
   });
 
   @override
-  Future<Either<ServerFailure, GalleryModel>> getGalleryImages() async {
+  Future<Either<ServerFailure, GalleryModel>> getGalleryImages(
+      int pageNumber) async {
     try {
-      final galleryModel = await galleryRemoteDataSource.getGalleryImages();
+      final galleryModel =
+          await galleryRemoteDataSource.getGalleryImages(pageNumber);
       return Right(galleryModel);
     } on ServerException {
       return Left(ServerFailure());
