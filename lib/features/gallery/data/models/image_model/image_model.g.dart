@@ -8,12 +8,12 @@ part of 'image_model.dart';
 
 _$_ImageModel _$$_ImageModelFromJson(Map<String, dynamic> json) =>
     _$_ImageModel(
-      author: json['author'] as String,
+      id: json['id'] as String,
       downloadUrl: json['download_url'] as String,
     );
 
 Map<String, dynamic> _$$_ImageModelToJson(_$_ImageModel instance) =>
     <String, dynamic>{
-      'author': instance.author,
+      'id': instance.id,
       'download_url': instance.downloadUrl,
     };

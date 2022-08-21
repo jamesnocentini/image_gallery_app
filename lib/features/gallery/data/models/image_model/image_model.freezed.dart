@@ -20,7 +20,7 @@ ImageModel _$ImageModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ImageModel {
-  String get author => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get downloadUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $ImageModelCopyWith<$Res> {
   factory $ImageModelCopyWith(
           ImageModel value, $Res Function(ImageModel) then) =
       _$ImageModelCopyWithImpl<$Res>;
-  $Res call({String author, String downloadUrl});
+  $Res call({String id, String downloadUrl});
 }
 
 /// @nodoc
@@ -47,13 +47,13 @@ class _$ImageModelCopyWithImpl<$Res> implements $ImageModelCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? author = freezed,
+    Object? id = freezed,
     Object? downloadUrl = freezed,
   }) {
     return _then(_value.copyWith(
-      author: author == freezed
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       downloadUrl: downloadUrl == freezed
           ? _value.downloadUrl
@@ -70,7 +70,7 @@ abstract class _$$_ImageModelCopyWith<$Res>
           _$_ImageModel value, $Res Function(_$_ImageModel) then) =
       __$$_ImageModelCopyWithImpl<$Res>;
   @override
-  $Res call({String author, String downloadUrl});
+  $Res call({String id, String downloadUrl});
 }
 
 /// @nodoc
@@ -85,13 +85,13 @@ class __$$_ImageModelCopyWithImpl<$Res> extends _$ImageModelCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? author = freezed,
+    Object? id = freezed,
     Object? downloadUrl = freezed,
   }) {
     return _then(_$_ImageModel(
-      author: author == freezed
-          ? _value.author
-          : author // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       downloadUrl: downloadUrl == freezed
           ? _value.downloadUrl
@@ -104,19 +104,19 @@ class __$$_ImageModelCopyWithImpl<$Res> extends _$ImageModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ImageModel implements _ImageModel {
-  _$_ImageModel({required this.author, required this.downloadUrl});
+  _$_ImageModel({required this.id, required this.downloadUrl});
 
   factory _$_ImageModel.fromJson(Map<String, dynamic> json) =>
       _$$_ImageModelFromJson(json);
 
   @override
-  final String author;
+  final String id;
   @override
   final String downloadUrl;
 
   @override
   String toString() {
-    return 'ImageModel(author: $author, downloadUrl: $downloadUrl)';
+    return 'ImageModel(id: $id, downloadUrl: $downloadUrl)';
   }
 
   @override
@@ -124,7 +124,7 @@ class _$_ImageModel implements _ImageModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ImageModel &&
-            const DeepCollectionEquality().equals(other.author, author) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.downloadUrl, downloadUrl));
   }
@@ -133,7 +133,7 @@ class _$_ImageModel implements _ImageModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(author),
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(downloadUrl));
 
   @JsonKey(ignore: true)
@@ -151,14 +151,14 @@ class _$_ImageModel implements _ImageModel {
 
 abstract class _ImageModel implements ImageModel {
   factory _ImageModel(
-      {required final String author,
+      {required final String id,
       required final String downloadUrl}) = _$_ImageModel;
 
   factory _ImageModel.fromJson(Map<String, dynamic> json) =
       _$_ImageModel.fromJson;
 
   @override
-  String get author;
+  String get id;
   @override
   String get downloadUrl;
   @override

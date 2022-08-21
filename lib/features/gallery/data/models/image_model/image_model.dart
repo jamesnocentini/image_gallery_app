@@ -6,7 +6,7 @@ part 'image_model.g.dart';
 @freezed
 class ImageModel with _$ImageModel {
   factory ImageModel({
-    required final String author,
+    required final String id,
     required final String downloadUrl,
   }) = _ImageModel;
 
