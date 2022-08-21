@@ -15,11 +15,18 @@ class GalleryRemoteDataSource {
   GalleryRemoteDataSource(this.httpClient);
 
   Future<GalleryModel> getGalleryImages(int pageNumber) async {
-    final uri = Uri.parse('$_baseUrl/list?page=$pageNumber');
-    final response = await httpClient.get(uri);
-    if (response.statusCode == 200) {
-      return GalleryModel.fromJson({'image_models': jsonDecode(response.body)});
+    try {
+      final uri = Uri.parse('$_baseUrl/list?page=$pageNumber');
+      final response = await httpClient.get(uri);
+      if (response.statusCode == 200) {
+        return GalleryModel.fromJson(
+            {'image_models': jsonDecode(response.body)});
+      }
+      // Throw when the status is not 200
+      throw ServerException();
+    } catch (e) {
+      // Throw when the connection failed due to connectivity
+      throw ServerException();
     }
-    throw ServerException();
   }
 }
