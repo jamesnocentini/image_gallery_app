@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_gallery_app/features/gallery/presentation/bloc/gallery_bloc.dart';
 import 'package:image_gallery_app/core/animations/page_route_transitions.dart';
+import 'package:image_gallery_app/features/gallery/presentation/bloc/gallery_bloc.dart';
 import 'package:image_gallery_app/features/image/presentation/image/image_page.dart';
 
 class GalleryGrid extends StatefulWidget {
@@ -71,47 +71,63 @@ class _GalleryGridState extends State<GalleryGrid> {
         return state.maybeWhen(
           initial: () => Container(),
           loading: () => const CircularProgressIndicator(color: Colors.black),
-          loaded: (galleryModel) => GridView.builder(
+          loaded: (galleryModel) => CustomScrollView(
             controller: _scrollController,
             // Defines the area to render before and after the viewport.
             // A higher value results in a smoother scrolling experience
             // but can hinder the initial loading experience as many images are
             // rendered concurrently.
             cacheExtent: 9999,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisSpacing: 0,
-              mainAxisSpacing: 0,
-              crossAxisCount: 3,
-            ),
-            itemCount: galleryModel.imageModels.length,
-            itemBuilder: (context, index) {
-              final imageModel = galleryModel.imageModels[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push<void>(
-                    context,
-                    PageRouteTransitions.fadeThrough(
-                      ImagePage(
-                        imageModel: imageModel,
-                      ),
-                    ),
-                  );
-                },
-                child: Hero(
-                  tag: imageModel.id,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider(
-                          imageModel.downloadUrl,
+            slivers: [
+              SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: 0,
+                  mainAxisSpacing: 0,
+                  crossAxisCount: 3,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  childCount: galleryModel.imageModels.length,
+                  (context, index) {
+                    final imageModel = galleryModel.imageModels[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push<void>(
+                          context,
+                          PageRouteTransitions.fadeThrough(
+                            ImagePage(
+                              imageModel: imageModel,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Hero(
+                        tag: imageModel.id,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: CachedNetworkImageProvider(
+                                imageModel.downloadUrl,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
+                    );
+                  },
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: CircularProgressIndicator(
+                      color: Colors.black,
                     ),
                   ),
                 ),
-              );
-            },
+              ),
+            ],
           ),
           orElse: () => ElevatedButton(
             onPressed: () => BlocProvider.of<GalleryBloc>(context)
