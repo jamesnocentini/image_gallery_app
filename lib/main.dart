@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_gallery_app/core/styles/app_colors.dart';
 import 'package:image_gallery_app/features/gallery/presentation/gallery/gallery_page.dart';
 import 'package:image_gallery_app/injection_container.dart' as di;
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Image Gallery',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: AppColors.white,
       ),
       home: const GalleryPage(),
     );
