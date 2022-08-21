@@ -3,9 +3,11 @@ import 'package:image_gallery_app/core/styles/app_colors.dart';
 import 'package:image_gallery_app/features/gallery/presentation/gallery/gallery_page.dart';
 import 'package:image_gallery_app/injection_container.dart' as di;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   // Initialize dependency injection
-  di.init();
+  await di.init();
 
   // Used in dev to see which layers are repainted
   // debugRepaintRainbowEnabled = true;
