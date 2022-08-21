@@ -52,13 +52,13 @@ class _GalleryGridState extends State<GalleryGrid> {
         );
       },
       buildWhen: (previous, current) {
-        // Don't build when the new state is an error and the previous one is a
-        // loaded state. This means some images were loaded but the next page
-        // in the pagination process failed to load images. By doing so, images
-        // that are already displayed remain visible.
         return previous.maybeMap(
               loaded: (value) {
                 return current.maybeMap(
+                  // Don't build when the new state is an error and the previous one is a
+                  // loaded state. This means some images were loaded but the next page
+                  // in the pagination process failed to load images. By doing so, images
+                  // that are already displayed remain visible.
                   error: (value) => false,
                   orElse: () => true,
                 );
