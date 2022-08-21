@@ -6,6 +6,8 @@ void main() {
   // Initialize dependency injection
   di.init();
 
+  // Used in dev to see which layers are repainted
+  // debugRepaintRainbowEnabled = true;
   runApp(const MyApp());
 }
 
