@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_gallery_app/features/gallery/domain/repositories/gallery_repository.dart';
 import 'package:image_gallery_app/features/gallery/presentation/bloc/gallery_bloc.dart';
 import 'package:image_gallery_app/features/image/presentation/image/image_page.dart';
 import 'package:image_gallery_app/injection_container.dart';
@@ -13,9 +14,10 @@ class GalleryPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Image Gallery')),
       body: Center(
         child: BlocProvider(
-          create: (context) => sl<GalleryBloc>(),
+          create: (context) =>
+              GalleryBloc(galleryRepository: sl<GalleryRepository>())
+                ..add(const GalleryEvent.getGalleryImages(1)),
           child: BlocBuilder<GalleryBloc, GalleryState>(
-            bloc: sl<GalleryBloc>()..add(const GalleryEvent.getGalleryImages()),
             builder: (context, state) {
               return state.when(
                 initial: () => const CircularProgressIndicator(),
